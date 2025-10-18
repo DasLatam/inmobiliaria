@@ -1,14 +1,12 @@
 // next.config.mjs
 /** @type {import('next').NextConfig} */
 
-const repo = 'inmobiliaria'
-const assetPrefix = process.env.NODE_ENV === 'production' ? `/${repo}/` : ''
-const basePath = process.env.NODE_ENV === 'production' ? `/${repo}` : ''
+// Eliminamos basePath y assetPrefix específicos de GitHub Pages
+// Vercel maneja esto automáticamente.
 
 const nextConfig = {
-  output: 'export', 
-  assetPrefix: assetPrefix, 
-  basePath: basePath, 
+  output: 'export', // Mantenemos la exportación estática
+  // La configuración de images sigue igual
   images: {
     loader: 'custom',
     loaderFile: './image-loader.js', 
@@ -18,8 +16,7 @@ const nextConfig = {
     ],
     unoptimized: true 
   },
-  // Evita el trailing slash para compatibilidad con GitHub Pages
-  trailingSlash: false,
+  trailingSlash: false, // Mantenemos esto por consistencia
 };
 
 export default nextConfig;
