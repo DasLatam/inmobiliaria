@@ -9,23 +9,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        brand: {
-          blue: '#4385B8', 
-          green: '#377825', 
-          gray: '#595959' 
-        }
-      },
-      fontFamily: {
-        // Fuentes aproximadas
-        gothamRounded: ['Arial Rounded MT Bold', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        gothamBook: ['Helvetica Neue', 'Arial', 'sans-serif'],
-        alleana: ['cursive'] 
-      }
+      // ... tus colores y fuentes ...
     },
   },
   plugins: [
-     require('@tailwindcss/typography'), // Plugin para estilos de 'prose'
+     require('@tailwindcss/typography'), // Asegúrate que esta línea esté presente
   ],
 };
 export default config;
