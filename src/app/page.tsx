@@ -6,26 +6,6 @@ import PropertyCard, { PropertyData } from '@/components/PropertyCard';
 import SearchForm from '@/components/SearchForm';
 import propertiesData from '@/data/properties.json'; 
 
-// Interfaz más específica para customFields
-interface CustomFields {
-  price?: string;
-  bedrooms?: string;
-  bathrooms?: string;
-  area?: string;
-  address?: string;
-  pax?: string;
-  'acepta-mascota'?: string; // Usar comillas si la clave tiene guiones
-  piscina?: string;
-  'diciembre-2da-quincena'?: string;
-  navidad?: string;
-  'ano-nuevo'?: string; // Corregido el nombre
-  'enero-1ra-quincena'?: string;
-  'enero-2da-quincena'?: string;
-  'febrero-1ra-quincena'?: string;
-  'febrero-2da-quincena'?: string;
-  [key: string]: any; // Permite otros campos, aunque tratamos de definir los principales
-}
-
 export default function HomePage() {
   const [filteredProperties, setFilteredProperties] = useState<PropertyData[]>([]);
   const [displayCount, setDisplayCount] = useState(12);
@@ -34,7 +14,7 @@ export default function HomePage() {
 
   const allProperties = useMemo(() => {
     return (propertiesData as any[]).map((prop): PropertyData => {
-       let customFields: CustomFields = {}; 
+       let customFields: { [key: string]: any } = {}; 
        try {
            if (typeof prop.customFields === 'string') {
                customFields = JSON.parse(prop.customFields || '{}');
@@ -43,7 +23,7 @@ export default function HomePage() {
            }
        } catch (e) { console.error(`Error parsing customFields for prop ID ${prop.id}:`, e); }
 
-      const rentalPriceKeys: (keyof CustomFields)[] = ['diciembre-2da-quincena', 'navidad', 'ano-nuevo', 'enero-1ra-quincena', 'enero-2da-quincena', 'febrero-1ra-quincena', 'febrero-2da-quincena'];
+      const rentalPriceKeys = ['diciembre-2da-quincena', 'navidad', 'ano-nuevo', 'enero-1ra-quincena', 'enero-2da-quincena', 'febrero-1ra-quincena', 'febrero-2da-quincena'];
       const rentalPrices: number[] = rentalPriceKeys
         .map(key => parseInt(((customFields[key] || '') as string).replace(/[^0-9]/g, '')))
         .filter(price => !isNaN(price) && price > 0);
@@ -53,7 +33,6 @@ export default function HomePage() {
           prop.locations.filter((loc: string) => loc && !loc.startsWith('X5') && !loc.startsWith('X6') && loc !== 'Argentina' && !loc.includes('Provincia de')) 
           : [];
 
-      // Acceso seguro a customFields usando claves definidas
       return {
         id: prop.id,
         title: prop.title,
@@ -61,10 +40,10 @@ export default function HomePage() {
         featuredImage: prop.featuredImage || undefined,
         price: parseInt(prop.price || '0') || undefined,
         rentalPrice: minRentalPrice,
-        address: prop.address || customFields?.address || prop.title,
-        bedrooms: parseInt(prop.bedrooms || customFields?.bedrooms || '0') || undefined,
-        bathrooms: parseInt(prop.bathrooms || customFields?.bathrooms || '0') || undefined,
-        area: parseInt(prop.area || customFields?.area || '0') || undefined,
+        address: prop.address || customFields?.['address'] || prop.title,
+        bedrooms: parseInt(prop.bedrooms || customFields?.['bedrooms'] || '0') || undefined,
+        bathrooms: parseInt(prop.bathrooms || customFields?.['bathrooms'] || '0') || undefined,
+        area: parseInt(prop.area || customFields?.['area'] || '0') || undefined,
         customFields: customFields, 
         locations: cleanLocations, 
       };
@@ -105,7 +84,6 @@ export default function HomePage() {
     setDisplayCount(12); 
   }, [filteredProperties]);
 
-  // JSX Corregido
   return (
     <div className="container mx-auto px-4 mt-8">
       <div className="mb-8 sticky top-[88px] z-10 bg-gray-50 py-4">
@@ -126,10 +104,8 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Elemento invisible para el observer */}
-      <div ref={loaderRef} className="h-10"></div> 
+      <div ref={loaderRef} className="h-10"></div>
 
-      {/* Mensajes de carga / final */}
       {displayCount < filteredProperties.length && (
         <p className="text-center text-gray-500 text-sm pb-16">Cargando más...</p> 
       )}
