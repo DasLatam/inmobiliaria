@@ -1,7 +1,7 @@
 // src/components/SearchForm.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { PropertyData } from './PropertyCard';
 
 type OperationType = 'comprar' | 'alquilar';
@@ -29,6 +29,9 @@ export default function SearchForm({ properties, onFilterChange, allLocations }:
   const [keyword, setKeyword] = useState('');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  // Estados que faltaban declarados
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [pets, setPets] = useState(false);
@@ -68,6 +71,9 @@ export default function SearchForm({ properties, onFilterChange, allLocations }:
           if (filters.pets && propCustomFields['acepta-mascota']?.toUpperCase() !== 'SI') return false;
           const piscina = propCustomFields['piscina'] || '';
           if (filters.pool && !piscina.toLowerCase().includes('piscina')) return false;
+          // Lógica de fechas (simplificada por ahora, se puede mejorar)
+          // if (filters.startDate && ...) return false;
+          // if (filters.endDate && ...) return false;
         }
 
         return true;
@@ -78,12 +84,13 @@ export default function SearchForm({ properties, onFilterChange, allLocations }:
     const handler = setTimeout(applyFilters, 300);
     return () => clearTimeout(handler);
 
-  }, [properties, operation, location, keyword, minPrice, maxPrice, adults, children, pets, pool, onFilterChange]);
+  }, [properties, operation, location, keyword, minPrice, maxPrice, adults, children, pets, pool, startDate, endDate, onFilterChange]);
 
 
   return (
      <div className="bg-white p-4 rounded-lg shadow-sm w-full border border-gray-200">
       <form onSubmit={(e) => e.preventDefault()} className="space-y-3">
+        {/* Fila 1 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <label className="block text-xs font-medium text-gray-500 mb-1">Operación</label>
@@ -101,6 +108,7 @@ export default function SearchForm({ properties, onFilterChange, allLocations }:
           </div>
         </div>
         
+        {/* Fila 2 */}
         {operation === 'comprar' && (
            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-gray-100">
               <div className="md:col-span-2"><label htmlFor="keyword-c" className="block text-xs font-medium text-gray-500 mb-1">Palabra Clave</label><input type="text" id="keyword-c" value={keyword} onChange={e => setKeyword(e.target.value)} placeholder="Ej: Pileta, vista al mar..." className="w-full px-3 py-1.5 border border-gray-300 rounded-lg text-xs"/></div>
