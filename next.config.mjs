@@ -1,22 +1,16 @@
-// next.config.mjs
+// next.config.mjs (Versión para build estándar en Vercel)
 /** @type {import('next').NextConfig} */
 
-// Eliminamos basePath y assetPrefix específicos de GitHub Pages
-// Vercel maneja esto automáticamente.
-
 const nextConfig = {
-  output: 'export', // Mantenemos la exportación estática
-  // La configuración de images sigue igual
+  // output: 'export', // Comentado o eliminado
   images: {
-    loader: 'custom',
-    loaderFile: './image-loader.js', 
+    loader: 'default', 
     remotePatterns: [
       { protocol: 'https', hostname: 'mcvpropiedades.com.ar' },
       { protocol: 'https', hostname: 'via.placeholder.com' }
     ],
-    unoptimized: true 
   },
-  trailingSlash: false, // Mantenemos esto por consistencia
+  trailingSlash: false, 
 };
 
 export default nextConfig;

@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<repository path="/workspaces/inmobiliaria">
+  <dir name="inmobiliaria" path=".">
+    <dir name=".github" path=".github">
+      <dir name="workflows" path=".github/workflows">
+        <file name="deploy.yml" size="1429" mtime="1760818226"/>
+      </dir>
+    </dir>
+    <file name=".gitignore" size="480" mtime="1760816297"/>
+    <file name="README.md" size="1450" mtime="1760816297"/>
+    <file name="eslint.config.mjs" size="524" mtime="1760816297"/>
+    <file name="image-loader.js" size="573" mtime="1760817370"/>
+    <file name="next-env.d.ts" size="262" mtime="1760816297"/>
+    <file name="next.config.mjs" size="638" mtime="1760819926"/>
+    <file name="next.config.ts" size="133" mtime="1760816297"/>
+    <dir name="node_modules" note="skipped"/>
+    <file name="package-lock.json" size="206891" mtime="1760818132"/>
+    <file name="package.json" size="645" mtime="1760818132"/>
+    <file name="postcss.config.js" size="102" mtime="1760819594"/>
+    <file name="postcss.config.mjs" size="81" mtime="1760816297"/>
+    <file name="process_xml.py" size="7972" mtime="1760816672"/>
+    <dir name="public" path="public">
+      <file name="Logo_MCV.png" size="79245" mtime="1760817293"/>
+      <file name="favico_blanco.png" size="21147" mtime="1760817293"/>
+      <file name="file.svg" size="391" mtime="1760816297"/>
+      <file name="globe.svg" size="1035" mtime="1760816297"/>
+      <file name="next.svg" size="1375" mtime="1760816297"/>
+      <file name="vercel.svg" size="128" mtime="1760816297"/>
+      <file name="window.svg" size="385" mtime="1760816297"/>
+    </dir>
+    <file name="repo-structure.xml" size="0" mtime="1760822478"/>
+    <dir name="scripts" path="scripts">
+      <file name="gen_repo_map.py" size="2102" mtime="1760822362"/>
+    </dir>
+    <dir name="src" path="src">
+      <dir name="app" path="src/app">
+        <file name="favicon.ico" size="25931" mtime="1760816297"/>
+        <file name="globals.css" size="180" mtime="1760817507"/>
+        <file name="layout.tsx" size="1590" mtime="1760817530"/>
+        <file name="page.tsx" size="4847" mtime="1760820172"/>
+        <dir name="propiedades" path="src/app/propiedades">
+          <dir name="[slug]" path="src/app/propiedades/[slug]">
+            <file name="page.tsx" size="10357" mtime="1760821922"/>
+          </dir>
+          <file name="etc" size="0" mtime="1760817713"/>
+        </dir>
+      </dir>
+      <dir name="components" path="src/components">
+        <file name="PropertyCard.tsx" size="3496" mtime="1760817607"/>
+        <file name="SearchForm.tsx" size="8670" mtime="1760818042"/>
+      </dir>
+      <dir name="data" path="src/data">
+        <file name="properties.json" size="1292028" mtime="1760816810"/>
+      </dir>
+    </dir>
+    <file name="tailwind.config.ts" size="778" mtime="1760817404"/>
+    <file name="tsconfig.json" size="602" mtime="1760816297"/>
+  </dir>
+</repository>
+
